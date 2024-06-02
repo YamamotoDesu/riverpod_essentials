@@ -23,3 +23,24 @@ class Example extends _$Example {
   // Add methods to mutate the state
 }
 ```
+
+## Consuming a Provider
+
+```dart
+// Extend ConsumerWidget instead of StatelessWidget, which is exposed by Riverpod
+class MyApp extends ConsumerWidget {
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final String value = ref.watch(helloWorldProvider);
+
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(title: const Text('Example')),
+        body: Center(
+          child: Text(value),
+        ),
+      ),
+    );
+  }
+}
+```
