@@ -101,3 +101,36 @@ Future<List<User>> user(UserRef ref, String companyId) async {
   return users;
 }
 ```
+
+Let’s see how the UI renders our FutureProvider.
+```dart
+
+class Home extends ConsumerWidget {
+  final String companyId;
+
+  const Home({Key? key, required this.companyId}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final users = ref.watch(userProvider(companyId));
+
+    return Scaffold(
+      appBar: AppBar(title: const Text('Example')),
+      body: Center(
+        child: users.when(
+          data: (data) => ListView.builder(
+            itemCount: data.length,
+            itemBuilder: (context, index) {
+              return ListTile(
+                title: Text(data[index].name),
+              );
+            },
+          ),
+          loading: () => const CircularProgressIndicator(),
+          error: (error, stackTrace) => Text('Error: $error'),
+        ),
+      ),
+    );
+  }
+}
+```
