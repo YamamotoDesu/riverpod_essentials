@@ -1,16 +1,25 @@
 # riverpod_essentials
 
-A new Flutter project.
+## Defining a Provider
+When defining providers via code generation, you can choose between annotated functions or classes. 
+Class-based providers offer the advantage of including public methods for external state modification, enabling side-effects. 
+Functional providers, essentially shorthand for class-based ones with just a build method, lack this flexibility for UI modification.
 
-## Getting Started
+```dart
+// Functional (Can’t perform side-effects using public methods)
+@riverpod
+String helloWorld(HelloWorldRef ref) {
+  return 'Hello world';
+}
 
-This project is a starting point for a Flutter application.
+// Class-Based (Can perform side-effects using public methods)
+@riverpod
+class Example extends _$Example {
+  @override
+  String build() {
+    return 'foo';
+  }
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+  // Add methods to mutate the state
+}
+```
