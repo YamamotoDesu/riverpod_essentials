@@ -56,3 +56,13 @@ Use `ref.listen` to add a listener to a provider, allowing you to execute action
 
 - Obtaining the value without listening to changes:   
 Use `ref.read` to get the current value of a provider without subscribing to updates, useful for events like "on click."
+
+```dart
+
+@riverpod
+String value(ValueRef ref) {
+  // use ref to obtain other providers
+  final repository = ref.watch(repositoryProvider);
+  return repository.get();
+}
+```
