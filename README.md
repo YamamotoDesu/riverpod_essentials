@@ -66,3 +66,8 @@ String value(ValueRef ref) {
   return repository.get();
 }
 ```
+
+## Exploring Different Types of Providers
+Riverpod offers eight different types of providers, each suited for specific use cases. However, some of them, such as StateProvider, StateNotifierProvider, and ChangeNotifierProvider, are considered legacy and will be deprecated in future versions. 
+
+
