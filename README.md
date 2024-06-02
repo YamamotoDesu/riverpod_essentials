@@ -70,4 +70,34 @@ String value(ValueRef ref) {
 ## Exploring Different Types of Providers
 Riverpod offers eight different types of providers, each suited for specific use cases. However, some of them, such as StateProvider, StateNotifierProvider, and ChangeNotifierProvider, are considered legacy and will be deprecated in future versions. 
 
+### Provider
+```dart
+class UserRepository{
+  Future<List<User>> getUsers(String companyId){...}
+    
+  Future<User> create(User user) async {...}
 
+  Future<User> update(User user) async {...}
+
+  Future<void> delete(User user) async {...}
+  // some methods.
+}
+```
+
+```dart
+@rivperpod
+UserRepository userRepository(UserRepositoryRef ref){
+    return UserRepository();
+}
+```
+
+
+### FutureProvider
+```dart
+// you can pass arguments to your requests like normal function.
+@riverpod
+Future<List<User>> user(UserRef ref, String companyId) async {
+  final users = ref.watch(userRepositoryProvider).getUsers(companyId);
+  return users;
+}
+```
